@@ -1,0 +1,19 @@
+<!-- /views/admin/master.html -->
+<!doctype html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/main.js">
+    </script>
+    <title>{{.title}}</title>
+    {{template "head" .}}
+</head>
+
+<body>
+    {{template "content" .}}
+    <hr> {{include "layouts/footer"}}
+</body>
+
+</html>
