@@ -20,7 +20,7 @@ func main() {
 	})
 
 	// register home route
-	router.RegisterHomeRoute(r)
+	router.RegisterAuthRoute(r)
 
 	r.Run(":8000")
 }

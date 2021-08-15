@@ -6,12 +6,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterHomeRoute(r *gin.Engine) {
+func RegisterAuthRoute(r *gin.Engine) {
 	// register static route
 	r.Static("/assets", "./public/assets")
 
 	r.GET("/", Controller.HomePage)
-	r.POST("/PostHomePage", Controller.PostHomePage)
-	r.GET("/query", Controller.QueryString)
-	r.GET("/param/:name/:age", Controller.ParamString)
+	r.POST("/login", Controller.Login)
+	r.POST("/register", Controller.Register)
 }
