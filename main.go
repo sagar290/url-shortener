@@ -1,11 +1,26 @@
 package main
 
 import (
+	"fmt"
+	"runtime/debug"
 	router "url-shortener/Router"
 
 	gintemplate "github.com/foolin/gin-template"
 	"github.com/gin-gonic/gin"
 )
+
+func TryCatch(f func()) func() error {
+	return func() (err error) {
+		defer func() {
+			if panicInfo := recover(); panicInfo != nil {
+				err = fmt.Errorf("%v, %s", panicInfo, string(debug.Stack()))
+				return
+			}
+		}()
+		f() // calling the decorated function
+		return err
+	}
+}
 
 func main() {
 
@@ -21,6 +36,7 @@ func main() {
 
 	// register home route
 	router.RegisterAuthRoute(r)
+	router.RegisterUrlsRoute(r)
 
 	r.Run(":8000")
 }

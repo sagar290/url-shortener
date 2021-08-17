@@ -5,11 +5,11 @@ import (
 )
 
 type Url struct {
-	Url_id       uint `gorm:"primaryKey"`
-	User_id      int64
-	Redirect_url string `gorm:"size:255"`
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	Url_id       uint      `gorm:"primaryKey" json:"url_id"`
+	User_id      int64     `json:"user_id"`
+	Redirect_url string    `gorm:"size:255" json:"redirect_url"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
 }
 
 func init() {

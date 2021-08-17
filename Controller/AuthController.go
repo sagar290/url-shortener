@@ -1,9 +1,7 @@
 package Controller
 
 import (
-	"fmt"
-	"net/http"
-	models "url-shortener/Model"
+	services "url-shortener/Services"
 	structs "url-shortener/Structs"
 
 	"github.com/gin-gonic/gin"
@@ -25,7 +23,7 @@ func Login(c *gin.Context) {
 	// c.BindJSON(&loginBody)
 
 	// fmt.Println("user: ", user)
-	status, message, response := models.CheckLoginAttempt(loginBody)
+	status, message, response := services.CheckLoginAttempt(loginBody)
 	// if no user found
 	if status == false {
 		c.JSON(401, gin.H{
@@ -61,7 +59,7 @@ func Register(c *gin.Context) {
 
 	// var user models.User
 
-	status, message, response := models.StoreUser(registerBody)
+	status, message, response := services.StoreUser(registerBody)
 
 	if status == false {
 
@@ -90,51 +88,5 @@ func Register(c *gin.Context) {
 			"name":  response.Name,
 			"token": response.Token,
 		},
-	})
-}
-
-func HomePage(c *gin.Context) {
-
-	// fetch database
-	var user models.User
-	db := models.Db
-	db.Model(&models.User{}).First(&user)
-
-	fmt.Println(user.Name)
-
-	c.HTML(http.StatusOK, "pages/home", gin.H{
-		"title": "Page file title!!",
-		"add": func(a int, b int) int {
-			return a + b
-		},
-	})
-}
-
-func PostHomePage(c *gin.Context) {
-	var formbody Formbody
-
-	c.BindJSON(&formbody)
-
-	c.JSON(200, gin.H{
-		"name": formbody.Name,
-		"age":  formbody.Age,
-	})
-}
-
-func QueryString(c *gin.Context) {
-	name := c.Query("name")
-	age := c.Query("age")
-	c.JSON(200, gin.H{
-		"name": name,
-		"age":  age,
-	})
-}
-
-func ParamString(c *gin.Context) {
-	name := c.Param("name")
-	age := c.Param("age")
-	c.JSON(200, gin.H{
-		"name": name,
-		"age":  age,
 	})
 }
