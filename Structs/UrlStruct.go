@@ -4,6 +4,7 @@ var User_id string
 
 type UrlBody struct {
 	Redirect_url string `json:"redirect_url" binding:"required"`
+	Slug         string `json:"slug" binding:"required"`
 }
 
 type UrlResponse struct {
