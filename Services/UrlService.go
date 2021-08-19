@@ -56,6 +56,19 @@ func GetUrl(url_id int) models.Url {
 
 }
 
+func GetUrlBySlug(slug string) models.Url {
+	var url models.Url
+
+	result := models.Db.Where(&models.Url{Slug: slug}).First(&url)
+
+	if result.Error != nil {
+		return url
+	}
+
+	return url
+
+}
+
 func UpdateUrl(url_id int, body structs.UrlBody) (bool, string) {
 	// var url models.Url
 	var message string
