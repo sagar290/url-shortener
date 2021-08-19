@@ -167,7 +167,7 @@ func CallbackUrl(c *gin.Context) {
 		return
 	}
 
-	services.AddClick(int(url.Url_id), refer_type)
+	go services.AddClick(int(url.Url_id), refer_type)
 
 	c.Redirect(http.StatusMovedPermanently, url.Redirect_url)
 }
