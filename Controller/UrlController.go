@@ -1,7 +1,7 @@
 package Controller
 
 import (
-	"fmt"
+	"net/http"
 	"strconv"
 	structs "url-shortener/Structs"
 
@@ -139,11 +139,35 @@ func DeleteUrl(c *gin.Context) {
 }
 
 func CallbackUrl(c *gin.Context) {
-	url := c.Param("url")
-	fmt.Println(c.Request.Header["Referer"])
-	fmt.Println(c.Request.Header["User-Agent"])
-	c.JSON(200, gin.H{
-		"message": url,
-		"data":    []gin.H{},
-	})
+	slug := c.Param("slug")
+	// query := c.Request.URL.Query()
+	var referer []string
+	var refer_type string
+	referer = c.Request.Header["Referer"]
+	// get referer
+	if len(referer) == 0 {
+		referer = c.Request.Header["Referrer"]
+		if len(referer) == 0 {
+			refer_type = "unknown"
+		}
+	}
+
+	if refer_type == "" {
+		refer_type = referer[0]
+	}
+
+	url := services.GetUrlBySlug(slug)
+	// fmt.Println(slug)
+	if url.Url_id == 0 {
+		c.JSON(404, gin.H{
+			"message": "no url found",
+			"data":    []gin.H{},
+		})
+
+		return
+	}
+
+	services.AddClick(int(url.Url_id), refer_type)
+
+	c.Redirect(http.StatusMovedPermanently, url.Redirect_url)
 }
