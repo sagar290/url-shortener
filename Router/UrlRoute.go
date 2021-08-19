@@ -19,5 +19,5 @@ func RegisterUrlsRoute(r *gin.Engine) {
 		url.POST("/urls", Controller.AddUrl)
 	}
 
-	r.GET("/:url", Controller.CallbackUrl)
+	r.GET("/:slug", Controller.CallbackUrl)
 }
