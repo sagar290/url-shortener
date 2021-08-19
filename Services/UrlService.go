@@ -33,7 +33,7 @@ func StoreUrl(url structs.UrlBody) (bool, string) {
 func GetUrls() []models.Url {
 	var urls []models.Url
 
-	result := models.Db.Where(&models.Url{User_id: int64(User.ID)}).Find(&urls)
+	result := models.Db.Where(&models.Url{User_id: int64(User.ID)}).Preload("Clicks").Find(&urls)
 
 	if result.Error != nil {
 		return urls

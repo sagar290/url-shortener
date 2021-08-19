@@ -9,6 +9,7 @@ type Url struct {
 	User_id      int64     `json:"user_id"`
 	Slug         string    `json:"slug"`
 	Redirect_url string    `gorm:"size:255" json:"redirect_url"`
+	Clicks       []Click   `gorm:"foreignKey:Url_id;references:Url_id"`
 	CreatedAt    time.Time `json:"created_at"`
 	UpdatedAt    time.Time `json:"updated_at"`
 }

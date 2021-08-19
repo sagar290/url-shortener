@@ -5,10 +5,11 @@ import (
 )
 
 type Click struct {
-	Click_id  uint `gorm:"primaryKey"`
-	Url_id    int
-	Referer   string `gorm:"size:255"`
-	Count     int
+	Click_id uint `gorm:"primaryKey"`
+	Url_id   int
+	Referer  string `gorm:"size:255"`
+	Count    int
+	// Url       Url `gorm:"references:Url_id"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
