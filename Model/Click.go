@@ -6,9 +6,9 @@ import (
 
 type Click struct {
 	Click_id  uint `gorm:"primaryKey"`
-	Url_id    int64
+	Url_id    int
 	Referer   string `gorm:"size:255"`
-	Count     int64
+	Count     int
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
