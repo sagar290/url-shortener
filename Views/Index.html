@@ -8,12 +8,16 @@
     <script src="assets/js/main.js">
     </script>
     <title>{{.title}}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     {{template "head" .}}
 </head>
 
 <body>
-    {{template "content" .}}
-    <hr> {{include "layouts/footer"}}
+    <div id="app">
+        {{include "layouts/navbar"}} {{template "content" .}}
+    </div>
+    <!-- <hr> -->
 </body>
 
 </html>

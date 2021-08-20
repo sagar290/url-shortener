@@ -12,11 +12,11 @@ func RegisterUrlsRoute(r *gin.Engine) {
 
 	url.Use(middleware.AuthRequired())
 	{
-		url.GET("/urls", Controller.GetUrls)
-		url.GET("/urls/:url_id", Controller.GetUrl)
-		url.PUT("/urls/:url_id", Controller.UpdateUrl)
-		url.DELETE("/urls/:url_id", Controller.DeleteUrl)
-		url.POST("/urls", Controller.AddUrl)
+		url.GET("api/urls", Controller.GetUrls)
+		url.GET("api/urls/:url_id", Controller.GetUrl)
+		url.PUT("api/urls/:url_id", Controller.UpdateUrl)
+		url.DELETE("api/urls/:url_id", Controller.DeleteUrl)
+		url.POST("api/urls", Controller.AddUrl)
 	}
 
 	r.GET("/:slug", Controller.CallbackUrl)

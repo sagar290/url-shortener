@@ -11,6 +11,6 @@ func RegisterAuthRoute(r *gin.Engine) {
 	r.Static("/assets", "./public/assets")
 
 	// r.GET("/", Controller.HomePage)
-	r.POST("/login", Controller.Login)
-	r.POST("/register", Controller.Register)
+	r.POST("api/login", Controller.Login)
+	r.POST("api/register", Controller.Register)
 }

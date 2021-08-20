@@ -1,9 +1,6 @@
 package Model
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
@@ -22,19 +19,8 @@ var (
 	Result     string
 )
 
-func init() {
-	viper.SetEnvPrefix("url-shortener")
-	viper.AutomaticEnv()
-	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath("/etc/url-shortener/")
-	viper.AddConfigPath("$HOME/.url-shortener")
-	viper.AddConfigPath("../")
-	err := viper.ReadInConfig() // Find and read the config file
-	if err != nil {             // Handle errors reading the config file
-		panic(fmt.Errorf("Fatal error config file: %w \n", err))
-	}
+func Init() {
+	var err error
 
 	Connection := viper.GetString("DB_CONNECTION")
 	Host := viper.GetString("DB_HOST")
